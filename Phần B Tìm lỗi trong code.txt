@@ -1,0 +1,134 @@
+Phần B: Tìm lỗi trong code
+
+Lỗi số 1:
+	
+<h1>{{ tenCuaHang }}</h1>
+Lỗi
+
+Thiếu () khi đọc Signal.
+
+Giải thích
+
+Nếu tenCuaHang là Signal thì phải gọi như một hàm.
+
+Đúng
+<h1>{{ tenCuaHang() }}</h1>
+
+
+Lỗi số 2:
+
+protected tangSoLy(): void {
+    soLy.update((n) => n + 1);
+}
+Lỗi
+
+Thiếu this.
+Giải thích
+
+soLy là thuộc tính của component nên phải truy cập thông qua this.
+
+Đúng
+protected tangSoLy(): void {
+    this.soLy.update((n) => n + 1);
+}
+
+
+Lỗi số 3:
+
+protected chonTraSuaMatcha(): void {
+    this.selectedDrink().set(MOCK_DRINKS[1]);
+}
+Lỗi
+
+Gọi () trước .set().
+
+Giải thích
+
+selectedDrink() trả về giá trị bên trong Signal.
+
+.set() phải gọi trên chính Signal.
+
+Đúng
+protected chonTraSuaMatcha(): void {
+    this.selectedDrink.set(MOCK_DRINKS[1]);
+}
+
+
+Lỗi số 4:
+
+protected giamSoLy(): void {
+    this.soLy.set(this.soLy - 1);
+}
+Lỗi
+
+this.soLy là Signal, không phải số.
+
+Giải thích
+
+Muốn lấy giá trị phải gọi this.soLy()
+
+Đúng
+protected giamSoLy(): void {
+    this.soLy.update((n) => n - 1);
+}
+
+
+Lỗi số 5:
+
+protected readonly toppingDaNhan = computed(() =>
+    this.selectedDrink().toppings.map((topping) => {
+        name: topping.name,
+        quantity: topping.quantity * this.soLy()
+    })
+);
+Lỗi
+
+Arrow Function đang dùng {} nhưng không return.
+
+Giải thích
+
+Khi dùng {} thì phải trả về object bằng return.
+
+Nếu không, map() sẽ trả về undefined.
+
+Đúng
+protected readonly toppingDaNhan = computed(() =>
+    this.selectedDrink().toppings.map((topping) => {
+        return {
+            name: topping.name,
+            quantity: topping.quantity * this.soLy()
+        };
+    })
+);
+
+
+Lỗi số 6:
+
+protected readonly tongTien = computed(() => this.giaCoBan() * this.soLy());
+
+protected resetGia(): void {
+    this.tongTien.set(0);
+}
+Lỗi
+
+Không thể gọi .set() trên computed.
+
+Giải thích
+
+computed() chỉ tự tính toán từ các Signal khác.
+
+Nó không lưu dữ liệu độc lập nên không có quyền sửa bằng .set().
+
+Đúng
+
+Nếu muốn thay đổi tongTien thì phải thay đổi Signal mà nó phụ thuộc.
+
+Ví dụ:
+
+this.soLy.set(1);
+
+hoặc
+
+this.giaCoBan.set(0);
+
+Khi đó tongTien sẽ tự tính lại.

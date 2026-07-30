@@ -1,0 +1,89 @@
+Phần A Lý Thuyết:
+Câu 1. Một component Angular gồm mấy file? Kể tên và cho biết mỗi file phụ trách việc gì.
+
+Một component Angular thường gồm 3 file:
+
+.ts: Chứa logic của component như khai báo signal, computed và các hàm xử lý.
+.html: Chứa giao diện (template) hiển thị lên màn hình.
+.css: Chứa các quy tắc định dạng (style) cho component.
+
+
+Câu 2. Trong @Component, ba mục selector, templateUrl, styleUrl có ý nghĩa gì?
+selector: Đặt tên cho component để có thể sử dụng trong HTML.
+templateUrl: Chỉ đường dẫn đến file HTML của component.
+styleUrl: Chỉ đường dẫn đến file CSS của component.
+
+
+Câu 3. Phân biệt {{ }} và ( ): mỗi cái đưa dữ liệu đi theo chiều nào?
+{{ }} (Interpolation): Hiển thị dữ liệu từ Component → Giao diện.
+
+Ví dụ:
+
+<h1>{{ title() }}</h1>
+( ) (Event Binding): Gửi sự kiện từ Giao diện → Component.
+
+Ví dụ:
+
+<button (click)="increaseServings()">
+
+
+Câu 4. Vì sao viết {{ title() }} mà không phải {{ title }}? Nếu quên cặp () thì màn hình sẽ hiện gì?
+
+Vì title là một Signal. Signal được đọc bằng cách gọi hàm, nên phải viết:
+
+{{ title() }}
+
+Nếu viết:
+
+{{ title }}
+
+thì Angular sẽ không lấy được giá trị của signal mà chỉ lấy chính đối tượng signal, nên màn hình sẽ không hiển thị chuỗi "My Recipe Box" như mong muốn (thường sẽ hiển thị biểu diễn của đối tượng hoặc kết quả không đúng).
+
+
+Câu 5. protected và readonly trước một signal có tác dụng gì? Nếu bỏ đi thì code có chạy không?
+protected: Giới hạn phạm vi truy cập, chỉ cho phép class và lớp kế thừa sử dụng.
+readonly: Không cho phép gán lại biến signal sang một đối tượng khác.
+
+Ví dụ:
+
+protected readonly title = signal('My Recipe Box');
+
+Nếu bỏ protected hoặc readonly thì code vẫn chạy, nhưng sẽ mất tính an toàn và rõ ràng của chương trình.
+
+
+Câu 6. Khi nào dùng .set(), khi nào dùng .update()? Cho một ví dụ đời thường cho mỗi loại.
+.set(): Dùng khi đã biết chính xác giá trị mới muốn gán.
+
+Ví dụ:
+
+this.selectRecipe.set(MOCK_RECIPES[1]);
+
+Đời thường: Chọn trực tiếp món Salad Caprese từ danh sách.
+
+.update(): Dùng khi giá trị mới phụ thuộc vào giá trị hiện tại.
+
+Ví dụ:
+
+this.soPhanAn.update(value => value + 1);
+
+Đời thường: Tăng số phần ăn từ 2 lên 3.
+
+
+Câu 7. computed() khác signal thường ở điểm nào? Vì sao không gọi được .set() trên một computed?
+Signal lưu dữ liệu và có thể thay đổi bằng .set() hoặc .update().
+Computed không lưu dữ liệu độc lập mà tự tính toán từ các signal khác.
+
+Ví dụ:
+
+adjustedIngredients = computed(() => ...)
+
+Khi selectRecipe hoặc soPhanAn thay đổi, adjustedIngredients sẽ tự cập nhật.
+
+Không thể gọi .set() trên computed vì giá trị của nó được tính tự động, không được phép gán trực tiếp.
+
+
+Câu 8. Vì sao nên tách interface ra file models.ts riêng thay vì viết thẳng trong component?
+
+Vì giúp tách biệt kiểu dữ liệu với logic của component, làm code dễ đọc và dễ quản lý hơn.
+
+Ngoài ra, nhiều component khác cũng có thể sử dụng lại các interface này mà không cần viết lại.
