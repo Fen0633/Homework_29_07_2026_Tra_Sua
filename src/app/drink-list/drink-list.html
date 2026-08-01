@@ -1,0 +1,14 @@
+@for(loaiTra of loaiTras; track loaiTra.id)
+{
+    <button (click) = "chonNuoc(loaiTra)" type="button">
+        @if(loaiTra.isPopular){
+            <span aria-label="Yêu thích">🔥</span>
+        }
+        @if(loaiTra.id === monDatNhat())
+        {
+            <span aria-label="Đắt nhất" title="Đắt nhất">💎</span>
+        }
+        Chọn món {{ loaiTra.name}}
+    </button>
+}
+<app-drink-detail [chonNuoc]="chonMon()"></app-drink-detail>

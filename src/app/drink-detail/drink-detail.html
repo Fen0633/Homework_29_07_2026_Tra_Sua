@@ -1,0 +1,43 @@
+<p>
+  Mô tả: {{chonNuoc().description}}
+ </p>
+ <p>
+    @if (chonNuoc().giaCoBan < 40000)
+    {
+        <span class="badge badge-binh-dan">Bình dân</span>
+    } @else if (chonNuoc().giaCoBan <= 50000)
+    {
+        <span class="bade badge-tieu-chuan">Tiêu chuẩn</span>
+    }@else {
+        <span class="badge badge-cao-cap">Cao cấp</span>
+    }
+ </p>
+ <p>Giá: {{chonNuoc().giaCoBan | number}} </p>
+ <button (click) = "giamSoLuong()" [disabled]="soLy() <= 1" aria-label="giamSoLuongTraSua">-</button>
+ <span>
+  {{ soLy()}}
+ </span>
+ <button (click) = "tangSoLuong()" aria-label="tangSoLuongTraSua">+</button>
+ <p>
+  Tổng tiền: {{tongTien() | number}}
+ </p>
+<ul style="list-style: none; padding: 0; margin: 0;">
+    @for(item of toppingCanDung(); track item.name; let i = $index; let even = $even)
+    {
+        <li [class.row-alt]="even" style = "display: flex; justify-content: space-between; padding: 8px 0;">
+            <span>{{i + 1}} {{item.name}}</span>
+            <span>{{item.quantity}} {{item.unit}}</span>
+            </li>
+    }@empty {
+        <p> Không có nguyên liệu nào.</p>
+    }
+</ul>
+<p>Tổng số lượng topping: {{tongTopping() }} </p>
+<p>
+    Tổng tiền (nếu số lượng hơn 5 thì giảm 10%): {{ tongTienSpecial() | number}}
+    @if(soLy() >= 5)
+    {
+        <span class = "discount-note">Đã giảm 10%</span>
+    }
+</p>
+ <img [src] = "chonNuoc().imgUrl" alt ="'Ảnh của ' + chonNuoc().name" width="300" />

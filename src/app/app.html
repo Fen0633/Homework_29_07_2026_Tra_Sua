@@ -1,25 +1,4 @@
 <h1>
   {{ name()}}
 </h1>
-<button (click) = "chonTraChanTrauDen()" type="button">Trà sữa trân châu đường đen</button>
-<button (click) = "chonTraSuaMatcha()" type="button">Trà sữa matcha</button>
-<button (click) = "chonHongTra()" type="button">Hồng trà sữa</button>
-<h2> Tên trà sữa:{{ chonMon().name}}
- </h2>
- <p>
-  Mô tả: {{chonMon().description}}
- </p>
- <p>Giá: {{chonMon().giaCoBan | number}} </p>
- <button (click) = "giamSoLuong()" aria-label="giamSoLuongTraSua">-</button>
- <span>
-  {{ soLy()}}
- </span>
- <button (click) = "tangSoLuong()" aria-label="tangSoLuongTraSua">+</button>
- <p>
-  Tổng tiền: {{tongTien() | number}}
- </p>
- <pre>
-  {{ toppingCanDung() | json}}
- </pre>
- <p>Giá nếu sau khi giảm : {{tongTienSpecial() | number}} </p>
- Tổng số lượng topping: {{tongTopping() }} 
+<app-drink-list></app-drink-list>
