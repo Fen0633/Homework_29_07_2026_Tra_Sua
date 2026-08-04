@@ -1,6 +1,22 @@
-@for(loaiTra of loaiTras; track loaiTra.id)
+<a class ="add-link" routerLink="/drinks/new">+Thêm thức uống mới</a>
+<label for = "searchDrink">Tìm nước uống</label>
+<input
+    id="searchDrink"
+    type="text"
+    placeholder="Nhập tên món ..."
+    [value]="searchDrink()"
+    (input)="timKiem($any($event.target).value)"
+/>
+<div class="sort-controls">
+    <button type="button" (click)="sapXepGiaTang()">Giá tăng dần</button>
+    <button type="button" (click)="sapXepGiaGiam()">Giá giảm dần</button>
+</div>
+
+<p class="ket-qua">Tìm thấy {{ soKetQua() }} món</p>
+
+@for(loaiTra of dsHienThi(); track loaiTra.id)
 {
-    <button (click) = "chonNuoc(loaiTra)" type="button">
+    <a class="drink-button" [routerLink]="['/drinks', loaiTra.id]">
         @if(loaiTra.isPopular){
             <span aria-label="Yêu thích">🔥</span>
         }
@@ -9,6 +25,7 @@
             <span aria-label="Đắt nhất" title="Đắt nhất">💎</span>
         }
         Chọn món {{ loaiTra.name}}
-    </button>
+    </a>
+}@empty {
+    <p>Không tìm thấy món phù hợp.</p>
 }
-<app-drink-detail [chonNuoc]="chonMon()"></app-drink-detail>

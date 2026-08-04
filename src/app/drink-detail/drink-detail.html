@@ -1,18 +1,24 @@
+<a routerLink="/drinks">Quay lại danh sách</a>
+@if (chonNuocDetail(); as drink) {
 <p>
-  Mô tả: {{chonNuoc().description}}
+  Mô tả: {{drink.description}}
  </p>
  <p>
-    @if (chonNuoc().giaCoBan < 40000)
+    @if (drink.giaCoBan < 40000)
     {
         <span class="badge badge-binh-dan">Bình dân</span>
-    } @else if (chonNuoc().giaCoBan <= 50000)
+    } @else if (drink.giaCoBan <= 50000)
     {
         <span class="bade badge-tieu-chuan">Tiêu chuẩn</span>
     }@else {
         <span class="badge badge-cao-cap">Cao cấp</span>
     }
  </p>
- <p>Giá: {{chonNuoc().giaCoBan | number}} </p>
+ <button type="button" class="favorite-button" (click)="doiYeuThich()">
+    {{drink.isPopular ? '★ Bỏ yêu thích' : '☆ Đánh dấu yêu thích'}}
+ </button>
+
+ <p>Giá: {{drink.giaCoBan | number}} </p>
  <button (click) = "giamSoLuong()" [disabled]="soLy() <= 1" aria-label="giamSoLuongTraSua">-</button>
  <span>
   {{ soLy()}}
@@ -40,4 +46,8 @@
         <span class = "discount-note">Đã giảm 10%</span>
     }
 </p>
- <img [src] = "chonNuoc().imgUrl" alt ="'Ảnh của ' + chonNuoc().name" width="300" />
+ <img [src] = "drink.imgUrl" alt ="'Ảnh của ' + drink.name" width="300" />
+<button type="button" class="delete-button" (click)="xoaMon()">Xóa món này</button>
+}@else{
+    <p>Không tìm thấy công thức.</p>
+}

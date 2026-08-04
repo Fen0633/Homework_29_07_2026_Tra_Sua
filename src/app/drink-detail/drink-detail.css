@@ -13,13 +13,41 @@
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-:host >p {
+:host > p {
   flex: 1 1 100%;
   margin: 6px 0;
 }
 
+/* lien ket quay lai: nho, tren cung, gach chan khi hover */
+:host > a {
+  order: -1;
+  flex: 1 1 100%;
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8a6449;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+:host > a:hover {
+  text-decoration: underline;
+}
+
+/* ten mon: to va dam nhat */
+h2 {
+  order: 2;
+  flex: 1 1 100%;
+  margin: 0;
+  color: #4a2f1c;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+}
+
 /* mo ta mon */
-:host >p:nth-of-type(1) {
+:host > p:nth-of-type(1) {
+  order: 3;
   font-style: italic;
   color: #7a6a5c;
   font-size: 14px;
@@ -27,28 +55,40 @@
   margin-bottom: 10px;
 }
 
-:host > p:nth-of-type(2){
+/* nhan phan khuc gia */
+:host > p:nth-of-type(2) {
+  order: 4;
   text-align: center;
   margin-bottom: 6px;
 }
 
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
 .badge-binh-dan {
-  background: #e0f3e9;
+  background: #e0f2e9;
   color: #2e7d4f;
 }
 
-.badge-tieu-chuan{
+.badge-tieu-chuan {
   background: #fff3cd;
   color: #946200;
 }
 
-.badge-cao-cap{
+.badge-cao-cap {
   background: #fde2e2;
   color: #b3261e;
 }
 
 /* cum nut +/- va so phan: nam ngang, can giua */
-:host >button {
+:host > button {
+  order: 6;
   flex: 0 0 auto;
   width: 36px;
   height: 36px;
@@ -75,7 +115,41 @@ button:disabled {
   cursor: not-allowed;
 }
 
-:host >span {
+/* nut yeu thich / xoa: ghi de style tron mac dinh cua :host > button */
+:host > button.favorite-button,
+:host > button.delete-button {
+  width: auto;
+  height: auto;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+:host > button.favorite-button {
+  order: 5;
+  background: #f5a623;
+  color: #fff;
+}
+
+:host > button.favorite-button:hover:not(:disabled) {
+  background: #d88f13;
+  transform: none;
+}
+
+:host > button.delete-button {
+  order: 11;
+  background: #b3261e;
+  color: #fff;
+}
+
+:host > button.delete-button:hover:not(:disabled) {
+  background: #8f1d17;
+  transform: none;
+}
+
+:host > span {
+  order: 6;
   flex: 0 0 auto;
   min-width: 32px;
   text-align: center;
@@ -85,14 +159,17 @@ button:disabled {
 }
 
 /* tong tien */
-:host >p:nth-of-type(3) {
+:host > p:nth-of-type(3) {
+  order: 7;
   font-size: 18px;
   font-weight: 700;
   color: #4a2f1c;
   text-align: center;
 }
 
-:host > ul{
+/* danh sach topping */
+:host > ul {
+  order: 8;
   flex: 1 1 100%;
   background: #f7f2ea;
   border: 1px solid #e6d7c0;
@@ -102,36 +179,38 @@ button:disabled {
   color: #4a3b2c;
 }
 
-li{
+li {
   margin: 0 2px;
   border-bottom: 1px solid #ece0cd;
 }
 
-li:last-child{
+li:last-child {
   border-bottom: none;
 }
 
-li.row-alt{
+li.row-alt {
   background: #eee3d0;
 }
 
-li span:first-child{
+li span:first-child {
   font-weight: 600;
 }
 
-li span:last-child{
+li span:last-child {
   color: #6b6b6b;
 }
 
 /* tong so luong topping */
-:host> p:nth-of-type(4) {
+:host > p:nth-of-type(4) {
+  order: 9;
   font-size: 14px;
   color: #6b6b6b;
   text-align: center;
 }
 
 /* tong tien special - noi bat nhat */
-:host >p:nth-of-type(5) {
+:host > p:nth-of-type(5) {
+  order: 10;
   font-size: 20px;
   font-weight: 800;
   color: #c0392b;
@@ -139,7 +218,7 @@ li span:last-child{
   margin-top: 4px;
 }
 
-.discount-note{
+.discount-note {
   display: inline-block;
   margin-left: 8px;
   padding: 2px 10px;
@@ -152,11 +231,26 @@ li span:last-child{
 }
 
 img {
+  order: 1;
   flex: 1 1 100%;
   display: block;
-  margin: 12px auto 0;
+  margin: 0 auto;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   max-width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+/* thong bao khong tim thay cong thuc: co khung, can giua, khong nhu trang loi */
+.not-found-message {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: 32px 20px;
+  border: 1px dashed #d9c3a6;
+  border-radius: 12px;
+  background: #faf3e8;
+  color: #7a6a58;
+  font-size: 14px;
+  text-align: center;
 }

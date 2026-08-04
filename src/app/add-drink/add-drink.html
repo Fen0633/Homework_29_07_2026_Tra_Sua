@@ -1,0 +1,18 @@
+<h2>Thêm công thức mới</h2>
+<form class="drink-form" [formGroup]="drinkForm" (ngSubmit)="save()">
+    <div class="field">
+        <label class="field-label" for="drink-name">Tên nước uống</label>
+        <input class="field-input" id="drink-name" type="text" formControlName="name"/>
+    </div>
+
+    <div class="field">
+        <label class="field-label" for="drink-desc">Mô tả</label>
+        <input class="field-input" id="drink-desc" type="text" formControlName="description"/>
+    </div>
+
+    <div class="field">
+        <label class="field-label" for="drink-price">Giá cơ bản</label>
+        <input class="field-input" id="drink-price" type="number" formControlName="giaCoBan"/>
+    </div>
+    <button class="submit-button" type="submit">Lưu công thức</button>
+</form>
