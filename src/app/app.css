@@ -1,10 +1,46 @@
 :host {
-  display: block;
-  max-width: 720px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-main {
-  display: block;
-  padding: 24px 16px 48px;
+.app-toolbar {
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.app-title {
+  font: var(--mat-sys-title-large);
+}
+
+.app-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.app-drawer {
+  width: 256px;
+  background-color: var(--mat-sys-surface-container-high);
+}
+
+.active-link {
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.app-content {
+  background-color: var(--mat-sys-surface);
+}
+
+.app-main {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+}
+
+.app-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
 }

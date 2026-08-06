@@ -1,3 +1,5 @@
+<h1 class="page-title">{{ chiXemPhoBien() ? 'Món phổ biến' : 'Menu' }}</h1>
+
 <a matButton="filled" class ="add-link" routerLink="/drinks/new">+Thêm thức uống mới</a>
 <mat-form-field appearance="outline" class="search-field">
 <mat-label>Tìm nước uống</mat-label>
@@ -18,20 +20,30 @@
 
 <p class="ket-qua">Tìm thấy {{ soKetQua() }} món</p>
 
-<mat-nav-list class="drink-nav-list">
+<div class="drink-grid">
 @for(loaiTra of dsHienThi(); track loaiTra.id)
 {
-    <a mat-list-item [routerLink]="['/drinks', loaiTra.id]">
-        @if(loaiTra.isPopular){
-            <mat-icon matListItemIcon aria-label="Yêu thích">local_fire_department</mat-icon>
-        }
-        @if(loaiTra.id === monDatNhat())
-        {
-            <mat-icon matListItemIcon aria-label="Đắt nhất" title="Đắt nhất">diamond</mat-icon>
-        }
-        <span matListItemTitle>Chọn món {{ loaiTra.name}}</span>
+    <a class="drink-card-link" [routerLink]="['/drinks', loaiTra.id]">
+        <mat-card class="drink-card" appearance="outlined">
+            <img mat-card-image [src]="loaiTra.imgUrl" [alt]="'Ảnh của ' + loaiTra.name" />
+            <mat-card-content>
+                @if (loaiTra.isPopular || loaiTra.id === monDatNhat()) {
+                    <div class="drink-card-badges">
+                        @if(loaiTra.isPopular){
+                            <mat-icon aria-label="Yêu thích">local_fire_department</mat-icon>
+                        }
+                        @if(loaiTra.id === monDatNhat())
+                        {
+                            <mat-icon aria-label="Đắt nhất" title="Đắt nhất">diamond</mat-icon>
+                        }
+                    </div>
+                }
+                <p class="drink-card-name">{{ loaiTra.name }}</p>
+                <p class="drink-card-price">{{ loaiTra.giaCoBan | number }} đ</p>
+            </mat-card-content>
+        </mat-card>
     </a>
 }@empty {
     <p>Không tìm thấy món phù hợp.</p>
 }
-</mat-nav-list>
+</div>

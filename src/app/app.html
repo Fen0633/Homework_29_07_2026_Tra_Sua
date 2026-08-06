@@ -1,9 +1,57 @@
-<mat-toolbar color="primary">
-  <span>
-  {{ name()}}
-  </span>
+<mat-toolbar color="primary" class="app-toolbar">
+  <button matIconButton (click)="drawer.toggle()" aria-label="Mở/đóng menu điều hướng">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="app-title">{{ name() }}</span>
 </mat-toolbar>
 
-<main>
-  <router-outlet></router-outlet>
-</main>
+<mat-sidenav-container class="app-shell">
+  <mat-sidenav
+    #drawer
+    class="app-drawer"
+    [mode]="isNarrowScreen() ? 'over' : 'side'"
+    [opened]="!isNarrowScreen()"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/drinks"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="isNarrowScreen() && drawer.close()"
+      >
+        <mat-icon matListItemIcon>local_cafe</mat-icon>
+        <span matListItemTitle>Menu</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/drinks"
+        [queryParams]="{ popular: true }"
+        routerLinkActive="active-link"
+        (click)="isNarrowScreen() && drawer.close()"
+      >
+        <mat-icon matListItemIcon>star</mat-icon>
+        <span matListItemTitle>Phổ biến</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/drinks/new"
+        routerLinkActive="active-link"
+        (click)="isNarrowScreen() && drawer.close()"
+      >
+        <mat-icon matListItemIcon>add</mat-icon>
+        <span matListItemTitle>Thêm món</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="app-content">
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<a matFab class="app-fab" routerLink="/drinks/new" aria-label="Thêm món mới">
+  <mat-icon>add</mat-icon>
+</a>
