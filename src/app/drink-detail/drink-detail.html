@@ -1,53 +1,62 @@
 <a routerLink="/drinks">Quay lại danh sách</a>
 @if (chonNuocDetail(); as drink) {
-<p>
-  Mô tả: {{drink.description}}
- </p>
- <p>
-    @if (drink.giaCoBan < 40000)
-    {
-        <span class="badge badge-binh-dan">Bình dân</span>
-    } @else if (drink.giaCoBan <= 50000)
-    {
-        <span class="bade badge-tieu-chuan">Tiêu chuẩn</span>
-    }@else {
-        <span class="badge badge-cao-cap">Cao cấp</span>
-    }
- </p>
- <button type="button" class="favorite-button" (click)="doiYeuThich()">
-    {{drink.isPopular ? '★ Bỏ yêu thích' : '☆ Đánh dấu yêu thích'}}
- </button>
+<mat-card class="drink-card" appearance="outlined">
+    <img mat-card-image [src]="drink.imgUrl" alt="'Ảnh của ' + drink.name" />
+    <mat-card-header>
+        <mat-card-title>{{drink.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p class="drink-description">
+            Mô tả: {{drink.description}}</p>
+        <p class="price-badge">
+            @if (drink.giaCoBan < 40000) { <span class="badge badge-binh-dan">Bình dân</span>
+                } @else if (drink.giaCoBan <= 50000) { <span class="bade badge-tieu-chuan">Tiêu chuẩn</span>
+                    }@else {
+                    <span class="badge badge-cao-cap">Cao cấp</span>
+                    }
+        </p>
+        <button matButton="filled" class="favorite-button" (click)="doiYeuThich()">
+            {{drink.isPopular ? '★ Bỏ yêu thích' : '☆ Đánh dấu yêu thích'}}
+        </button>
 
- <p>Giá: {{drink.giaCoBan | number}} </p>
- <button (click) = "giamSoLuong()" [disabled]="soLy() <= 1" aria-label="giamSoLuongTraSua">-</button>
- <span>
-  {{ soLy()}}
- </span>
- <button (click) = "tangSoLuong()" aria-label="tangSoLuongTraSua">+</button>
- <p>
-  Tổng tiền: {{tongTien() | number}}
- </p>
-<ul style="list-style: none; padding: 0; margin: 0;">
-    @for(item of toppingCanDung(); track item.name; let i = $index; let even = $even)
-    {
-        <li [class.row-alt]="even" style = "display: flex; justify-content: space-between; padding: 8px 0;">
-            <span>{{i + 1}} {{item.name}}</span>
-            <span>{{item.quantity}} {{item.unit}}</span>
-            </li>
-    }@empty {
-        <p> Không có nguyên liệu nào.</p>
-    }
-</ul>
-<p>Tổng số lượng topping: {{tongTopping() }} </p>
-<p>
-    Tổng tiền (nếu số lượng hơn 5 thì giảm 10%): {{ tongTienSpecial() | number}}
-    @if(soLy() >= 5)
-    {
-        <span class = "discount-note">Đã giảm 10%</span>
-    }
-</p>
- <img [src] = "drink.imgUrl" alt ="'Ảnh của ' + drink.name" width="300" />
-<button type="button" class="delete-button" (click)="xoaMon()">Xóa món này</button>
+        <div class="counter-group">
+            <button matIconButton (click)="giamSoLuong()" [disabled]="soLy() <= 1" aria-label="giamSoLuongTraSua">
+                <mat-icon>remove</mat-icon>
+            </button>
+            <span aria-live="polite">
+                {{ soLy()}}
+            </span>
+            <button matIconButton (click)="tangSoLuong()" aria-label="tangSoLuongTraSua">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <p class="price-summary">
+            Tổng tiền: {{tongTien() | number}}
+        </p>
+        <mat-list class="topping-list">
+            @for(item of toppingCanDung(); track item.name; let i = $index; let even = $even)
+            {
+            <mat-list-item [class.row-alt]="even">
+                <span matListItemTitle>{{i + 1}} {{item.name}}</span>
+                <span matListItemMeta>{{item.quantity}} {{item.unit}}</span>
+            </mat-list-item>
+            }@empty {
+            <p> Không có nguyên liệu nào.</p>
+            }
+        </mat-list>
+        <p class="topping-total">Tổng số lượng topping: {{tongTopping() }} </p>
+        <p class="price-final">
+            Tổng tiền (nếu số lượng hơn 5 thì giảm 10%): {{ tongTienSpecial() | number}}
+            @if(soLy() >= 5)
+            {
+            <span class="discount-note">Đã giảm 10%</span>
+            }
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button matButton="filled" class="delete-button" (click)="xoaMon()">Xóa món này</button>
+    </mat-card-actions>
+</mat-card>
 }@else{
-    <p>Không tìm thấy công thức.</p>
+<p class="not-found-message">Không tìm thấy công thức.</p>
 }

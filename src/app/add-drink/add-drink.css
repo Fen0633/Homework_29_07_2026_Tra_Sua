@@ -7,7 +7,6 @@
   border: 1px solid #e8d9c5;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(111, 78, 55, 0.08);
-  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
 h2 {
@@ -23,58 +22,9 @@ h2 {
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: #7a6a58;
-  letter-spacing: 0.2px;
-}
-
-.field-input {
-  box-sizing: border-box;
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #e0cfb8;
-  border-radius: 10px;
-  background: #fff;
-  color: #4a3627;
-  font-size: 14px;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.field-input:focus {
-  border-color: #6f4e37;
-  box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.15);
 }
 
 .submit-button {
   align-self: flex-start;
-  margin-top: 4px;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 999px;
-  background: #6f4e37;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-
-.submit-button:hover {
-  background: #8a6449;
-  transform: translateY(-1px);
-}
-
-.submit-button:active {
-  transform: translateY(0);
 }

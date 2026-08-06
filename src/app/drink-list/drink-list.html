@@ -1,12 +1,16 @@
-<a class ="add-link" routerLink="/drinks/new">+Thêm thức uống mới</a>
-<label for = "searchDrink">Tìm nước uống</label>
+<a matButton="filled" class ="add-link" routerLink="/drinks/new">+Thêm thức uống mới</a>
+<mat-form-field appearance="outline" class="search-field">
+<mat-label>Tìm nước uống</mat-label>
 <input
+    matInput
     id="searchDrink"
     type="text"
     placeholder="Nhập tên món ..."
     [value]="searchDrink()"
     (input)="timKiem($any($event.target).value)"
 />
+</mat-form-field>
+
 <div class="sort-controls">
     <button type="button" (click)="sapXepGiaTang()">Giá tăng dần</button>
     <button type="button" (click)="sapXepGiaGiam()">Giá giảm dần</button>
@@ -14,18 +18,20 @@
 
 <p class="ket-qua">Tìm thấy {{ soKetQua() }} món</p>
 
+<mat-nav-list class="drink-nav-list">
 @for(loaiTra of dsHienThi(); track loaiTra.id)
 {
-    <a class="drink-button" [routerLink]="['/drinks', loaiTra.id]">
+    <a mat-list-item [routerLink]="['/drinks', loaiTra.id]">
         @if(loaiTra.isPopular){
-            <span aria-label="Yêu thích">🔥</span>
+            <mat-icon matListItemIcon aria-label="Yêu thích">local_fire_department</mat-icon>
         }
         @if(loaiTra.id === monDatNhat())
         {
-            <span aria-label="Đắt nhất" title="Đắt nhất">💎</span>
+            <mat-icon matListItemIcon aria-label="Đắt nhất" title="Đắt nhất">diamond</mat-icon>
         }
-        Chọn món {{ loaiTra.name}}
+        <span matListItemTitle>Chọn món {{ loaiTra.name}}</span>
     </a>
 }@empty {
     <p>Không tìm thấy món phù hợp.</p>
 }
+</mat-nav-list>

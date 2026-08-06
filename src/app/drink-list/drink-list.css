@@ -11,60 +11,17 @@
   border: 1px solid #e8d9c5;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(111, 78, 55, 0.08);
-  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
 .add-link {
   flex: 1 1 100%;
-  text-align: center;
-  padding: 8px 0;
-  color: #6f4e37;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border: 1px dashed #d9c3a6;
-  border-radius: 10px;
 }
 
-.add-link:hover {
-  background: #f3e6d5;
-}
-
-/* --- Ô tìm kiếm: chiếm hết chiều ngang khung chứa --- */
-label[for="searchDrink"] {
+.search-field {
   flex: 1 1 100%;
-  font-size: 12px;
-  font-weight: 500;
-  color: #7a6a58; /* nhạt hơn nội dung chính, vẫn đạt tối thiểu 4.5:1 trên nền #fff8f0 */
-  letter-spacing: 0.2px;
-}
-
-input#searchDrink {
-  flex: 1 1 100%;
-  box-sizing: border-box;
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #e0cfb8;
-  border-radius: 10px;
-  background: #fff;
-  color: #4a3627;
-  font-size: 14px;
-  font-family: inherit;
-  outline: none;
-  margin-bottom: 4px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-input#searchDrink::placeholder {
-  color: #b8a58e;
-}
-
-input#searchDrink:focus {
-  border-color: #6f4e37;
-  box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.15);
-}
-
-/* --- Sắp xếp theo giá --- */
 .sort-controls {
   flex: 1 1 100%;
   display: flex;
@@ -89,7 +46,6 @@ input#searchDrink:focus {
   background: #f3e6d5;
 }
 
-/* --- Đếm kết quả tìm kiếm --- */
 .ket-qua {
   flex: 1 1 100%;
   margin: 0;
@@ -99,40 +55,12 @@ input#searchDrink:focus {
   text-align: center;
 }
 
-/* --- Danh sách liên kết chọn món: cùng hàng, tự xuống dòng, cách đều bằng gap --- */
-.drink-button {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 999px;
-  background: #6f4e37;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-
-.drink-button:hover {
-  background: #8a6449;
-  transform: translateY(-1px);
-}
-
-.drink-button:active {
-  transform: translateY(0);
-}
-
-.drink-button span {
-  margin-right: 4px;
-}
-
-/* --- Trạng thái "không tìm thấy" --- */
-p {
+.drink-nav-list {
   flex: 1 1 100%;
+}
+
+/* "không tìm thấy" nằm trong @empty của mat-nav-list */
+p {
   margin: 0;
   padding: 16px;
   color: #a99a89;

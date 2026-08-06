@@ -1,14 +1,18 @@
-import { Component, signal, computed, input, inject, numberAttribute } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { DrinkModel, Topping } from '../models';
 import { DecimalPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DrinkService } from '../drink-service';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 
 @Component({
   selector: 'app-drink-detail',
-  imports: [DecimalPipe, RouterLink],
+  imports: [DecimalPipe, RouterLink, MatButtonModule, MatCardModule, MatIconModule, MatListModule],
   templateUrl: './drink-detail.html',
   styleUrl: './drink-detail.css',
 })

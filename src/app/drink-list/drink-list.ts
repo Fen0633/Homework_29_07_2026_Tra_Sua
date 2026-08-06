@@ -1,10 +1,15 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { DrinkService } from '../drink-service';
 import { RouterLink } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-drink-list',
-  imports: [RouterLink],
+  imports: [RouterLink,MatFormFieldModule,MatInputModule,MatIconModule,MatButtonModule,MatListModule],
   templateUrl: './drink-list.html',
   styleUrl: './drink-list.css',
 })
